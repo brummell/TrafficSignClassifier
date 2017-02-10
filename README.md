@@ -122,6 +122,8 @@ The inspiration for my solution came in two forms, and from two major sources. T
 * Though I got the inspiration for augmentation from the paper originally, I added brightness-related augmentations and used only the translational affine transforms.  
 * My decision to use same padding was initially easy dimensionality calculation and tracking, but experimenting with valid padding showed no improvement in the architectures in which it was employed.
 
+Regarding implementation, I used and molded a number of portions of the LeCunNet example, converting them wherever necessary and taking some early stabs at making more broadly applicable functions and architectural modules... of course, a week later I was introduced to Keras making all of that not /super/ useful ;-)
+
 My best run model results were:
 * validation set accuracy of 0.999 
 * test set accuracy of 0.973
