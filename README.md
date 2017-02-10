@@ -4,13 +4,13 @@ CNN to classify German traffic signs for SDCND program
 ---
 [//]: # (Image References)
 
-[labelhisto]: ./examples/visualization.jpg "Histogram of Class Counts"
-[randoimgtiling]: ./examples/grayscale.jpg "Sample of Dataset"
-[augmentedimages0]: ./examples/random_noise.jpg "Original Sample Image"
-[augmentedimages1]: ./examples/placeholder.png "Affine Transformation (Translation)"
-[augmentedimages2]: ./examples/placeholder.png "Brightness Augmentation"
-[augmentedimages3]: ./examples/placeholder.png "Shadow Insertion"
-[foundsigns]: ./examples/placeholder.png "Found New Images of German Street Signs with Top K Softmax Scores"
+[labelhisto]: https://github.com/brummell/TrafficSignClassifier/blob/master/label_histogram.png?raw=true "Histogram of Class Counts"
+[randoimgtiling]: https://github.com/brummell/TrafficSignClassifier/blob/master/randosignpics.png?raw=true "Sample of Dataset"
+[augmentedimages0]: https://github.com/brummell/TrafficSignClassifier/blob/master/sampleoriginal.png?raw=true "Original Sample Image"
+[augmentedimages1]: https://github.com/brummell/TrafficSignClassifier/blob/master/sampletranslated.png?raw=true "Affine Transformation (Translation)"
+[augmentedimages2]: https://github.com/brummell/TrafficSignClassifier/blob/master/samplebrightened.png?raw=true "Brightness Augmentation"
+[augmentedimages3]: https://github.com/brummell/TrafficSignClassifier/blob/master/sampleshadow.png?raw=true "Shadow Insertion"
+[foundsigns]: https://github.com/brummell/TrafficSignClassifier/blob/master/foundsigns.png?raw=true "Found New Images of German Street Signs with Top K Softmax Scores"
 
 
 ## Rubric Points
