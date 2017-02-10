@@ -4,14 +4,14 @@ CNN to classify German traffic signs for SDCND program
 ---
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[labelhisto]: ./examples/visualization.jpg "Histogram of Class Counts"
+[randoimgtiling]: ./examples/grayscale.jpg "Sample of Dataset"
+[augmentedimages0]: ./examples/random_noise.jpg "Original Sample Image"
+[augmentedimages1]: ./examples/placeholder.png "Affine Transformation (Translation)"
+[augmentedimages2]: ./examples/placeholder.png "Brightness Augmentation"
+[augmentedimages3]: ./examples/placeholder.png "Shadow Insertion"
+[foundsigns]: ./examples/placeholder.png "Found New Images of German Street Signs with Top K Softmax Scores"
+
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -137,30 +137,35 @@ The images, as well as histograms of the K top softmax outputs for the images ar
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
-The code for making predictions on my final model is located in the tenth cell of the Ipython notebook.
+*see cell 15 of ipython notebook
 
-Here are the results of the prediction:
+Given the number of images I collected (I was quite lose in selection criteria, hoping for interesting but unexpected results), I chose to take a slightly more nuanced approach to hand scoring the results, the scores given by the classifier are given below in the plots of the top k softmax scores. I used http://www.gettingaroundgermany.info/zeichen.shtml as a primary reference for signs. It seems fairly comprehensive and up-to-date with deprecations
 
+I found:
+*24 signs that were in the provided data set which were marked incorrectly
+*10 signs that were in the provided data set which were marked correctly
 
+This yielded 29.41% accuracy for those signs that matched our training set
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+I also found:
+*7 signs that were not represented in our training data, but which were classified into a very related category
+*14 signs that had nothing even remotely close in our training set
+*4 signs (not distinct from the above errors) that were incorrect on internal numbers alone
+
+Also notable was the supreme confidence of the classifier in the scores, only a handful of the below charts show that there was even a unique second place, and it is almost always a miniscule score. In all other cases, you see the algorithm simple goes through sequentially picking 0-scores. Also of note was that the classifier seems to default to yield classifications unusually often.
+
+Obviously, this is a considerably worse performance than on even the test set. That said, the sheer variety of signs, the low fidelity of the input architecture compared to the fineness of discrepancy within a broad class of sign, as well as the huge dependance of the net on augmented data (in fact, I suspect forcing a uniform distribution caused considerable overfitting in this sense), leave me unsurprised about this performance. That said, the aforementioned (apparent, anyway) preference for color, and the generally high false positive rate on yield signs is fairly convincing that there are still relatively low-hanging fruit to be picked int his regard. 
+
+See bottom for chart of scores as well as pictures.
+
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+*see cell 17 of ipython notebook
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+As you see below, the model was extremely aggressive in it's predictions, only rarely showing a true second candidate, and it almost always being just shy of null. I don't have an intuition for how expected or acceptable this is broadly, but it seems to have been fairly common amongst people using a similar architecture. 
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
-
-
-For the second image ... 
+![alt text][foundsigns]
 
 
 
@@ -169,4 +174,4 @@ For the second image ...
 
 
 
-I used http://www.gettingaroundgermany.info/zeichen.shtml as a primary reference for signs. It seems fairly comprehensive and up-to-date with deprecations.
+.
