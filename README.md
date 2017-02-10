@@ -2,18 +2,6 @@
 CNN to classify German traffic signs for SDCND program
 
 ---
-
-**Build a Traffic Sign Recognition Project**
-
-The goals / steps of this project are the following:
-* Load the data set (see below for links to the project data set)
-* Explore, summarize and visualize the data set
-* Design, train and test a model architecture
-* Use the model to make predictions on new images
-* Analyze the softmax probabilities of the new images
-* Summarize the results with a written report
-
-
 [//]: # (Image References)
 
 [image1]: ./examples/visualization.jpg "Visualization"
@@ -64,19 +52,25 @@ I also took the equally obvious step of printing a tiling of random images a few
 
 ####1. Describe how, and identify where in your code, you preprocessed the image data. What tecniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
 
-The code for this step is contained in the fourth code cell of the IPython notebook.
+*see cell 8 of ipython notebook
 
-As a first step, I decided to convert the images to grayscale because ...
+My initial preprocessing pipeline was extremely simple, and consisted only of rescaling and centering the pixel values to a range of [-0.5, 0.5] (in fact, in the process of copying my code from an old notebook to a new, I left this out, and was reminded of how painful --or in some cases, seemingly intractable- training can be without providing the net with a narrowed, centered range of values for the data). I chose this route over a channel-wise mean/std normalization primarily because I saw no noticeable improvements using these, and they both require fairly large array calculations, as well as the persistance of the mean and std values for later use in testing and prediction. I also chose to forgo and PCA-based normalization for the sake of time, though I heard little of any major successes with it. I took the advice of Vivek and, rather than grayscaling my images, I used a layer of three 1x1 kernels in order to learn an optimal color mapping. In retrospect, looking at some of the failures in my from-the-web prediction set, I'm not entirely convinced retaining the color channels wasn't distracting to the final classifier, as it often seemed to prioritize color similarities even over drastically different geometries.
 
-Here is an example of a traffic sign image before and after grayscaling.
-
-![alt text][image2]
-
-As a last step, I normalized the image data because ...
+See the next point below for a discussion of my expansion of the preprocessing via random augmentation, as well as example images from the same.
 
 ####2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
-The code for splitting the data into training and validation sets is contained in the fifth code cell of the IPython notebook.  
+*see cell 8 of ipython notebook
+
+For the basic division of data, I simply shuffled all of the data, 
+
+
+For better of worse, I wound up finishing the behavioral cloning project ahead of this one (who can turn down video games?! ;-)) and so I decided to improve the augmentation pipeline from that project and then fold it back into this project --as I was essentially stuck at ~96.2 accuracy without it, and began to figure the above-mentioned class imbalance more seriously. My augmentation set again drew considerable inspiration from Vivek, who himself mentioned recieving some help from a fellow student of ours, but whose name I can't remember. For this particular project, I wound up using only brightness augmentation, random linear shadow insertion, and affine transforms (well, only translation in this case). I experimented with how much I augemented deficient sets, but in the end found that matching them to the cardinality of the most populus label worked out just fine. See below:
+
+![alt text][augmentedimages0]
+![alt text][augmentedimages1]
+![alt text][augmentedimages2]
+![alt text][augmentedimages3]
 
 To cross validate my model, I randomly split the training data into a training set and validation set. I did this by ...
 
