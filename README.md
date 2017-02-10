@@ -131,12 +131,9 @@ which were on par or exceeded with the lower of the paper's best performing six 
 
 ####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+I pulled fifty or so images of various German traffic signs from Google Images. I also found it all but necessary to crop them to something akin to the training set. Other, less-addressable issues with the images in terms of classification included: examples from a class of sign in the dataset, but with inner symbols not seen in the dataset; considerably higher amounts of distracting imagery, often including other, smaller signs directly adjacent to the primary sign; numeric portions (both in the sense of not existing outside the dataset, and in that getting the broader sign class but not the number (e.g. speed) was a very common issue. 
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
-
-The first image might be difficult to classify because ...
+The images, as well as histograms of the K top softmax outputs for the images are displayed at the bottom of this report. 
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -144,13 +141,6 @@ The code for making predictions on my final model is located in the tenth cell o
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
