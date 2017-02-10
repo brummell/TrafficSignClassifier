@@ -83,7 +83,7 @@ For better of worse, I wound up finishing the behavioral cloning project ahead o
 
 ####3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-*see cell 10 of ipython notebook
+*see cell 9 of ipython notebook
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
@@ -100,12 +100,14 @@ For better of worse, I wound up finishing the behavioral cloning project ahead o
 | Fully-Connected | 100 dimensional output; relu activation; dropout with probability of 0.5; no downsampling 	|
 | Fully-Connected | 43 dimensional output; relu activation; no regularization; no downsampling 	|
 | Softmax         | |
+| Loss            | cross-entropy loss function |
+
 
 ####4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-The code for training the model is located in the eigth cell of the ipython notebook. 
+*see cell 10 of ipython notebook
 
-To train the model, I used an ....
+I used the Adam optimizer exclusively, enjoying it's largely "set-and-forget" capabilities and never felt that the optimization was dragging. Though I experimented an order of magnitude in either direction, I found that the learning rate --the only parameter that I tuned- that yielded the best results was 1E-3. I gradually scaled my batch size up in integral multiples of 128 until I had come comfortably close to saturating my GPU. I experimented with epoch counts ranging from 10 up to 40, but found that there was little gain after epoch 20 in most cases, and in fact, there frequently was overfitting.
 
 ####5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
