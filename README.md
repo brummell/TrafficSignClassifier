@@ -111,25 +111,21 @@ I used the Adam optimizer exclusively, enjoying it's largely "set-and-forget" ca
 
 ####5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
-The code for calculating the accuracy of the model is located in the ninth cell of the Ipython notebook.
+*see cell 10 of ipython notebook
 
-My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+The inspiration for my solution came in two forms, and from two major sources. The architecture itself was drawn from Sermanet and LeCun's Traffic Sign Recognition with Multi-Scale Convolutional Networks (it being focused and successful on almost this exact task), most notably, the multi-scale feature feed into the output classifier (concatenating the outputs of each convolutional layer pair, and passing that into the first fully-connected layer, allowing the final classifier the full breadth of feature scales). Beyond that, I also used a fairly similar architecture, with the following expansions: 
+* In experimenting, I found gains in 3 each of fc and conv. layers, and particularly in limit 5x5 kernels to the first layer, any expansion in either depth or creep of 5x5 kernels led to early, strong overfitting.
+* As mentioned before, I used a color-mapping layer rather than grayscale. They used both and had preferable results with the latter.
+* I used a ReLU activation rather than their tanh, this was merely out of habit, and I can't comment on the performance of my architecture with the latter.
+* I used RGB throughout, with temporary conversions to HSV in the augmentations only.
+* I only experimented with perpetually trainable parameters throughout all of my experimenting.
+* Though I got the inspiration for augmentation from the paper originally, I added brightness-related augmentations and used only the translational affine transforms.  
+* My decision to use same padding was initially easy dimensionality calculation and tracking, but experimenting with valid padding showed no improvement in the architectures in which it was employed.
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to over fitting or under fitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
-
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
+My best run model results were:
+* validation set accuracy of 0.999 
+* test set accuracy of 0.973
+which were on par or exceeded with the lower of the paper's best performing six competition results. Still, their top model managed just over 99% accuracy, obviously leaving room for me to improve. Namely, I'm interested in --in the future, experimenting with inception models and transfer learning generally. I expect there is also still a considerable number of augmentation functions that could be added to increase the robustness of the system.
 
 ###Test a Model on New Images
 
